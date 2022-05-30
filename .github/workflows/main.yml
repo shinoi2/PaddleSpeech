@@ -15,10 +15,6 @@ jobs:
         with:
           submodules: recursive
       -
-        name: Download model file
-        run: wget https://github.com/shinoi2/research/releases/download/docker-build-20220321/paddle.tar.gz &&
-             wget https://github.com/shinoi2/research/releases/download/docker-build-20220321/light.pth
-      -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       -
