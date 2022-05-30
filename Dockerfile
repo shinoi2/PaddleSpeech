@@ -21,7 +21,7 @@ RUN pip install paddlepaddle-gpu==2.2.2.post112 -f https://www.paddlepaddle.org.
 RUN mkdir -p /root/.paddlespeech/models/pwgan_csmsc-zh/ && wget https://paddlespeech.bj.bcebos.com/Parakeet/released_models/pwgan/pwg_baker_ckpt_0.4.zip -O pwg_baker_ckpt_0.4.zip && \
     mkdir -p /root/.paddlespeech/models/fastspeech2_csmsc-zh/ && wget https://paddlespeech.bj.bcebos.com/Parakeet/released_models/fastspeech2/fastspeech2_nosil_baker_ckpt_0.4.zip -O fastspeech2_nosil_baker_ckpt_0.4.zip && \
     mkdir -p /root/.paddlespeech/models/conformer_wenetspeech-zh-16k/ && wget https://paddlespeech.bj.bcebos.com/s2t/wenetspeech/asr1_conformer_wenetspeech_ckpt_0.1.1.model.tar.gz -O asr1_conformer_wenetspeech_ckpt_0.1.1.model.tar && \
-    mkidr -p /root/.paddlespeech/models/panns_cnn14-32k/ && wget https://paddlespeech.bj.bcebos.com/cls/panns_cnn14.tar.gz -O panns_cnn14.tar.gz
+    mkdir -p /root/.paddlespeech/models/panns_cnn14-32k/ && wget https://paddlespeech.bj.bcebos.com/cls/panns_cnn14.tar.gz -O panns_cnn14.tar.gz
 
 ADD . /root/PaddleSpeech
 
