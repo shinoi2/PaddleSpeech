@@ -32,4 +32,3 @@ jobs:
           push: true
           tags: registry.cn-hangzhou.aliyuncs.com/chinapji/research_speech
           cache-from: type=registry,ref=registry.cn-hangzhou.aliyuncs.com/chinapji/research_speech
-          cache-to: type=inline
