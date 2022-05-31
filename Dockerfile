@@ -22,18 +22,18 @@ RUN python3 -m pip install pip --upgrade && \
 RUN wget https://paddlespeech.bj.bcebos.com/Parakeet/nltk_data.tar.gz \
     -O /root/nltk_data.tar.gz && \
     tar -xvf /root/nltk_data.tar.gz -C /root/ && \
-    mkdir -p /root/.paddlespeech/models/deepspeech2offline_aishell-zh-16k/ && \
+    mkdir -p /root/.paddlespeech/models/deepspeech2offline_aishell-zh-16k/1.0/ && \
     wget https://paddlespeech.bj.bcebos.com/s2t/aishell/asr0/asr0_deepspeech2_aishell_ckpt_0.1.1.model.tar.gz \
-    -O /root/.paddlespeech/models/deepspeech2offline_aishell-zh-16k/asr0_deepspeech2_aishell_ckpt_0.1.1.model.tar.gz && \
+    -O /root/.paddlespeech/models/deepspeech2offline_aishell-zh-16k/1.0/asr0_deepspeech2_aishell_ckpt_0.1.1.model.tar.gz && \
     mkdir -p /root/.paddlespeech/models/language_model/data/lm/ && \
     wget https://deepspeech.bj.bcebos.com/zh_lm/zh_giga.no_cna_cmn.prune01244.klm \
     -O /root/.paddlespeech/models/language_model/data/lm/zh_giga.no_cna_cmn.prune01244.klm && \
-    mkdir -p /root/.paddlespeech/models/fastspeech2_csmsc-zh/ && \
+    mkdir -p /root/.paddlespeech/models/fastspeech2_csmsc-zh/1.0/ && \
     wget https://paddlespeech.bj.bcebos.com/Parakeet/released_models/fastspeech2/fastspeech2_nosil_baker_static_0.4.zip \
-    -O /root/.paddlespeech/models/fastspeech2_csmsc-zh/fastspeech2_nosil_baker_static_0.4.zip && \
-    mkdir -p /root/.paddlespeech/models/pwgan_csmsc-zh/ && \
+    -O /root/.paddlespeech/models/fastspeech2_csmsc-zh/1.0/fastspeech2_nosil_baker_static_0.4.zip && \
+    mkdir -p /root/.paddlespeech/models/pwgan_csmsc-zh/1.0/ && \
     wget https://paddlespeech.bj.bcebos.com/Parakeet/released_models/pwgan/pwg_baker_static_0.4.zip \
-    -O /root/.paddlespeech/models/pwgan_csmsc-zh/pwg_baker_static_0.4.zip
+    -O /root/.paddlespeech/models/pwgan_csmsc-zh/1.0/pwg_baker_static_0.4.zip
 
 ADD . /root/PaddleSpeech
 

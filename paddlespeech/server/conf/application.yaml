@@ -44,7 +44,7 @@ asr_inference:
     am_predictor_conf:
         device: 'gpu:0' # set 'gpu:id' or 'cpu'
         switch_ir_optim: True
-        glog_info: False  # True -> print glog
+        glog_info: True  # True -> print glog
         summary: True  # False -> do not show predictor config
 
 
@@ -90,7 +90,7 @@ tts_inference:
     am_predictor_conf:
         device: 'gpu:0' # set 'gpu:id' or 'cpu'
         switch_ir_optim: True
-        glog_info: False # True -> print glog
+        glog_info: True # True -> print glog
         summary: True  # False -> do not show predictor config
 
     # voc (vocoder) choices=['pwgan_csmsc', 'mb_melgan_csmsc','hifigan_csmsc']
@@ -102,7 +102,7 @@ tts_inference:
     voc_predictor_conf:
         device: 'gpu:0' # set 'gpu:id' or 'cpu'
         switch_ir_optim: True  
-        glog_info: False # True -> print glog
+        glog_info: True # True -> print glog
         summary: True  # False -> do not show predictor config
 
     # others
@@ -132,7 +132,7 @@ cls_inference:
     predictor_conf:
         device: 'gpu:0' # set 'gpu:id' or 'cpu'
         switch_ir_optim: True
-        glog_info: False  # True -> print glog
+        glog_info: True  # True -> print glog
         summary: True  # False -> do not show predictor config
 
 
