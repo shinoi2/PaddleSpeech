@@ -24,7 +24,7 @@ RUN mkdir -p /root/.paddlespeech/models/pwgan_csmsc-zh/ && \
     mkdir -p /root/.paddlespeech/models/fastspeech2_csmsc-zh/ && \
     wget https://paddlespeech.bj.bcebos.com/Parakeet/released_models/fastspeech2/fastspeech2_nosil_baker_ckpt_0.4.zip -O /root/.paddlespeech/models/fastspeech2_csmsc-zh/fastspeech2_nosil_baker_ckpt_0.4.zip && \
     mkdir -p /root/.paddlespeech/models/conformer_wenetspeech-zh-16k/ && \
-    wget https://paddlespeech.bj.bcebos.com/s2t/wenetspeech/asr1_conformer_wenetspeech_ckpt_0.1.1.model.tar.gz -O /root/.paddlespeech/models/conformer_wenetspeech-zh-16k/asr1_conformer_wenetspeech_ckpt_0.1.1.model.tar && \
+    wget https://paddlespeech.bj.bcebos.com/s2t/wenetspeech/asr1_conformer_wenetspeech_ckpt_0.1.1.model.tar.gz -O /root/.paddlespeech/models/conformer_wenetspeech-zh-16k/asr1_conformer_wenetspeech_ckpt_0.1.1.model.tar.gz && \
     mkdir -p /root/.paddlespeech/models/panns_cnn14-32k/ && \
     wget https://paddlespeech.bj.bcebos.com/cls/panns_cnn14.tar.gz -O /root/.paddlespeech/models/panns_cnn14-32k/panns_cnn14.tar.gz
 
