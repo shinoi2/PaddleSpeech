@@ -28,6 +28,6 @@ ADD . /root/PaddleSpeech
 
 EXPOSE 8090
 
-RUN cd /root/PaddleSpeech && pip install .
+RUN cd /root/PaddleSpeech && pip install -e .[develop]
 
 ENTRYPOINT cd /root/PaddleSpeech/tests/unit/server/offline && paddlespeech_server start --config_file ./conf/application.yaml
