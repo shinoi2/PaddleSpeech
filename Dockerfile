@@ -17,17 +17,21 @@ RUN ln -s /usr/local/cuda-11.2/targets/x86_64-linux/lib/libcublas.so.11 ./usr/lo
 
 RUN python3 -m pip install pip --upgrade && \
     pip install paddlepaddle-gpu==2.2.2.post112 -f https://www.paddlepaddle.org.cn/whl/linux/mkl/avx/stable.html && \
-    pip install protobuf==3.20.1 pytest-runner
+    pip install paddlespeech_ctcdecoders protobuf==3.20.1 pytest-runner
 
-RUN mkdir -p /root/.paddlespeech/models/pwgan_csmsc-zh/ && wget https://paddlespeech.bj.bcebos.com/Parakeet/released_models/pwgan/pwg_baker_ckpt_0.4.zip -O pwg_baker_ckpt_0.4.zip && \
-    mkdir -p /root/.paddlespeech/models/fastspeech2_csmsc-zh/ && wget https://paddlespeech.bj.bcebos.com/Parakeet/released_models/fastspeech2/fastspeech2_nosil_baker_ckpt_0.4.zip -O fastspeech2_nosil_baker_ckpt_0.4.zip && \
-    mkdir -p /root/.paddlespeech/models/conformer_wenetspeech-zh-16k/ && wget https://paddlespeech.bj.bcebos.com/s2t/wenetspeech/asr1_conformer_wenetspeech_ckpt_0.1.1.model.tar.gz -O asr1_conformer_wenetspeech_ckpt_0.1.1.model.tar && \
-    mkdir -p /root/.paddlespeech/models/panns_cnn14-32k/ && wget https://paddlespeech.bj.bcebos.com/cls/panns_cnn14.tar.gz -O panns_cnn14.tar.gz
+RUN mkdir -p /root/.paddlespeech/models/pwgan_csmsc-zh/ && \
+    wget https://paddlespeech.bj.bcebos.com/Parakeet/released_models/pwgan/pwg_baker_ckpt_0.4.zip -O /root/.paddlespeech/models/pwgan_csmsc-zh/pwg_baker_ckpt_0.4.zip && \
+    mkdir -p /root/.paddlespeech/models/fastspeech2_csmsc-zh/ && \
+    wget https://paddlespeech.bj.bcebos.com/Parakeet/released_models/fastspeech2/fastspeech2_nosil_baker_ckpt_0.4.zip -O /root/.paddlespeech/models/fastspeech2_csmsc-zh/fastspeech2_nosil_baker_ckpt_0.4.zip && \
+    mkdir -p /root/.paddlespeech/models/conformer_wenetspeech-zh-16k/ && \
+    wget https://paddlespeech.bj.bcebos.com/s2t/wenetspeech/asr1_conformer_wenetspeech_ckpt_0.1.1.model.tar.gz -O /root/.paddlespeech/models/conformer_wenetspeech-zh-16k/asr1_conformer_wenetspeech_ckpt_0.1.1.model.tar && \
+    mkdir -p /root/.paddlespeech/models/panns_cnn14-32k/ && \
+    wget https://paddlespeech.bj.bcebos.com/cls/panns_cnn14.tar.gz -O /root/.paddlespeech/models/panns_cnn14-32k/panns_cnn14.tar.gz
 
 ADD . /root/PaddleSpeech
 
 EXPOSE 8090
 
-RUN cd /root/PaddleSpeech && pip install -e .[develop]
+RUN cd /root/PaddleSpeech && pip install .
 
-ENTRYPOINT cd /root/PaddleSpeech/tests/unit/server/offline && paddlespeech_server start --config_file ./conf/application.yaml
+ENTRYPOINT cd /root/PaddleSpeech/paddlespeech/server/ && paddlespeech_server start --config_file ./conf/application.yaml
