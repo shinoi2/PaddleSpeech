@@ -15,7 +15,8 @@ RUN ln -s /usr/local/cuda-11.2/targets/x86_64-linux/lib/libcublas.so.11 ./usr/lo
     ln -s /usr/local/cuda-11.2/targets/x86_64-linux/lib/libcusolver.so.11 /usr/local/cuda-11.2/targets/x86_64-linux/lib/libcusolver.so && \
     ln -s /usr/lib/x86_64-linux-gnu/libcudnn.so.8 /usr/lib/x86_64-linux-gnu/libcudnn.so
 
-RUN pip install paddlepaddle-gpu==2.2.2.post112 -f https://www.paddlepaddle.org.cn/whl/linux/mkl/avx/stable.html && \
+RUN python3 -m pip install pip --upgrade && \
+    pip install paddlepaddle-gpu==2.2.2.post112 -f https://www.paddlepaddle.org.cn/whl/linux/mkl/avx/stable.html && \
     pip install protobuf==3.20.1 pytest-runner
 
 RUN mkdir -p /root/.paddlespeech/models/pwgan_csmsc-zh/ && wget https://paddlespeech.bj.bcebos.com/Parakeet/released_models/pwgan/pwg_baker_ckpt_0.4.zip -O pwg_baker_ckpt_0.4.zip && \
@@ -25,6 +26,8 @@ RUN mkdir -p /root/.paddlespeech/models/pwgan_csmsc-zh/ && wget https://paddlesp
 
 ADD . /root/PaddleSpeech
 
+EXPOSE 8090
+
 RUN cd /root/PaddleSpeech && pip install .
 
-ENTRYPOINT cd /root/PaddleSpeech/paddlespeech/server && paddlespeech_server start --config_file ./conf/application.yaml
+ENTRYPOINT cd /root/PaddleSpeech/tests/unit/server/offline && paddlespeech_server start --config_file ./conf/application.yaml
