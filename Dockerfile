@@ -19,7 +19,9 @@ RUN python3 -m pip install pip --upgrade && \
     pip install paddlepaddle-gpu==2.2.2.post112 -f https://www.paddlepaddle.org.cn/whl/linux/mkl/avx/stable.html && \
     pip install paddlespeech_ctcdecoders protobuf==3.20.1 pytest-runner
 
-RUN mkdir -p /root/.paddlespeech/models/pwgan_csmsc-zh/ && \
+RUN wget https://paddlespeech.bj.bcebos.com/Parakeet/nltk_data.tar.gz -O /root/nltk_data.tar.gz && \
+    tar -xvf /root/nltk_data.tar.gz -C /root/ && \
+    mkdir -p /root/.paddlespeech/models/pwgan_csmsc-zh/ && \
     wget https://paddlespeech.bj.bcebos.com/Parakeet/released_models/pwgan/pwg_baker_ckpt_0.4.zip -O /root/.paddlespeech/models/pwgan_csmsc-zh/pwg_baker_ckpt_0.4.zip && \
     mkdir -p /root/.paddlespeech/models/fastspeech2_csmsc-zh/ && \
     wget https://paddlespeech.bj.bcebos.com/Parakeet/released_models/fastspeech2/fastspeech2_nosil_baker_ckpt_0.4.zip -O /root/.paddlespeech/models/fastspeech2_csmsc-zh/fastspeech2_nosil_baker_ckpt_0.4.zip && \
