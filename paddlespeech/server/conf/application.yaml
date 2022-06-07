@@ -9,7 +9,7 @@ port: 8090
 # The task format in the engin_list is: <speech task>_<engine type>
 # task choices = ['asr_python', 'asr_inference', 'tts_python', 'tts_inference', 'cls_python', 'cls_inference']
 protocol: 'http'
-engine_list: ['asr_inference', 'tts_inference']
+engine_list: ['asr_python', 'tts_python', 'text_python']
 
 
 #################################################################################
