@@ -4,7 +4,7 @@
 #                             SERVER SETTING                                    #
 #################################################################################
 host: 0.0.0.0
-port: 8090
+port: 8091
 
 # The task format in the engin_list is: <speech task>_<engine type>
 # task choices = ['asr_online', 'tts_online']
@@ -31,7 +31,7 @@ asr_online:
     force_yes: True
 
     am_predictor_conf:
-        device:  # set 'gpu:id' or 'cpu'
+        device: 'gpu:0'  # set 'gpu:id' or 'cpu'
         switch_ir_optim: True
         glog_info: False  # True -> print glog
         summary: True  # False -> do not show predictor config

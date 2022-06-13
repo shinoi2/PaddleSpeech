@@ -32,3 +32,12 @@ jobs:
           push: true
           tags: registry.cn-hangzhou.aliyuncs.com/chinapji/research_speech
           cache-from: type=registry,ref=registry.cn-hangzhou.aliyuncs.com/chinapji/research_speech
+      -
+        name: Build and push Ws
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile.ws
+          push: true
+          tags: registry.cn-hangzhou.aliyuncs.com/chinapji/research_speech_ws
+          cache-from: type=registry,ref=registry.cn-hangzhou.aliyuncs.com/chinapji/research_speech_ws
