@@ -20,12 +20,16 @@
 namespace ppspeech {
 
 struct AssemblerOptions {
-    int32 frame_chunk_size;
-    int32 frame_chunk_stride;
-    
+    // refer:https://github.com/PaddlePaddle/PaddleSpeech/blob/develop/paddlespeech/s2t/exps/deepspeech2/model.py
+    // the nnet batch forward
+    int32 receptive_filed_length;
+    int32 subsampling_rate;
+    int32 nnet_decoder_chunk;
+
     AssemblerOptions()
-        : frame_chunk_size(1),
-          frame_chunk_stride(1) {}
+        : receptive_filed_length(1),
+          subsampling_rate(1),
+          nnet_decoder_chunk(1) {}
 };
 
 class Assembler : public FrontendInterface {
@@ -43,15 +47,11 @@ class Assembler : public FrontendInterface {
     // feat dim
     virtual size_t Dim() const { return dim_; }
 
-    virtual void SetFinished() {
-        base_extractor_->SetFinished();
-    }
+    virtual void SetFinished() { base_extractor_->SetFinished(); }
 
     virtual bool IsFinished() const { return base_extractor_->IsFinished(); }
 
-    virtual void Reset() {
-        base_extractor_->Reset();
-    }
+    virtual void Reset() { base_extractor_->Reset(); }
 
   private:
     bool Compute(kaldi::Vector<kaldi::BaseFloat>* feats);
@@ -59,6 +59,7 @@ class Assembler : public FrontendInterface {
     int32 dim_;
     int32 frame_chunk_size_;    // window
     int32 frame_chunk_stride_;  // stride
+    int32 receptive_filed_length_;
     std::queue<kaldi::Vector<kaldi::BaseFloat>> feature_cache_;
     std::unique_ptr<FrontendInterface> base_extractor_;
     DISALLOW_COPY_AND_ASSIGN(Assembler);

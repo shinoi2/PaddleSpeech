@@ -28,15 +28,15 @@ DEFINE_string(model_path, "avg_1.jit.pdmodel", "paddle nnet model");
 DEFINE_string(param_path, "avg_1.jit.pdiparams", "paddle nnet model param");
 DEFINE_string(word_symbol_table, "words.txt", "word symbol table");
 DEFINE_string(graph_path, "TLG", "decoder graph");
-
 DEFINE_double(acoustic_scale, 1.0, "acoustic scale");
 DEFINE_int32(max_active, 7500, "decoder graph");
+DEFINE_int32(nnet_decoder_chunk, 1, "paddle nnet forward chunk");
 DEFINE_int32(receptive_field_length,
              7,
-             "receptive field of two CNN(kernel=5) downsampling module.");
+             "receptive field of two CNN(kernel=3) downsampling module.");
 DEFINE_int32(downsampling_rate,
              4,
-             "two CNN(kernel=5) module downsampling rate.");
+             "two CNN(kernel=3) module downsampling rate.");
 DEFINE_string(
     model_input_names,
     "audio_chunk,audio_chunk_lens,chunk_state_h_box,chunk_state_c_box",
@@ -93,8 +93,9 @@ int main(int argc, char* argv[]) {
     std::shared_ptr<ppspeech::Decodable> decodable(
         new ppspeech::Decodable(nnet, raw_data, FLAGS_acoustic_scale));
 
-    int32 chunk_size = FLAGS_receptive_field_length;
-    int32 chunk_stride = FLAGS_downsampling_rate;
+    int32 chunk_size = FLAGS_receptive_field_length +
+                       (FLAGS_nnet_decoder_chunk - 1) * FLAGS_downsampling_rate;
+    int32 chunk_stride = FLAGS_downsampling_rate * FLAGS_nnet_decoder_chunk;
     int32 receptive_field_length = FLAGS_receptive_field_length;
     LOG(INFO) << "chunk size (frame): " << chunk_size;
     LOG(INFO) << "chunk stride (frame): " << chunk_stride;
