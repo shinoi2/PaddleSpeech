@@ -108,6 +108,8 @@ class Frontend():
         load_single_dict({ord(u'地'): u'de,di4'})
 
     def _get_initials_finals(self, word: str) -> List[List[str]]:
+        if word.encode('utf-8').isalpha():
+            return self._get_alphabet_initials_finals(word)
         initials = []
         finals = []
         if self.g2p_model == "pypinyin":
@@ -141,6 +143,45 @@ class Frontend():
                     finals.append(pinyin)
         return initials, finals
 
+    def _get_alphabet_initials_finals(self, word: str) -> List[List[str]]:
+        word.upper()
+        initials = []
+        finals = []
+        alphabet = {
+            'A': ([''], ['ei5']),
+            'B': (['b'], ['i5']),
+            'C': (['s'], ['ei5']),
+            'D': (['d'], ['i5']),
+            'E': ([''], ['i5']),
+            'F': (['', 'f'], ['ei5', 'u5']),
+            'G': (['j'], ['i5']),
+            'H': (['', 'ch'], ['ei5', 'i5']),
+            'I': ([''], ['ai5']),
+            'J': (['j'], ['ei5']),
+            'K': (['k'], ['ei5']),
+            'L': (['', ''], ['ei5', 'er5']),
+            'M': (['', 'm'], ['ei5', 'en5']),
+            'N': ([''], ['en5']),
+            'O': ([''], ['ou5']),
+            'P': (['p'], ['i5']),
+            'Q': (['k'], ['iou5']),
+            'R': ([''], ['er5']),
+            'S': (['', 's'], ['ei5', 'i5']),
+            'T': (['t'], ['i5']),
+            'U': ([''], ['iou5']),
+            'V': (['w'], ['ei5']),
+            'W': (['d', 'b', 'l'], ['a5', 'u5', 'iou5']),
+            'X': (['', 'k', 's'], ['ei5', 'e5', 'i5']),
+            'Y': ([''], ['uai1']),
+            'Z': (['z'], ['ei5']),
+        }
+        for ch in word:
+            if ch in alphabet:
+                initials += alphabet[ch][0]
+                finals += alphabet[ch][1]
+        return initials, finals
+
+
     # if merge_sentences, merge all sentences into one phone sequence
     def _g2p(self,
              sentences: List[str],
@@ -151,14 +192,12 @@ class Frontend():
         for seg in segments:
             phones = []
             # Replace all English words in the sentence
-            seg = re.sub('[a-zA-Z]+', '', seg)
+            # seg = re.sub('[a-zA-Z]+', '', seg)
             seg_cut = psg.lcut(seg)
             initials = []
             finals = []
             seg_cut = self.tone_modifier.pre_merge_for_modify(seg_cut)
             for word, pos in seg_cut:
-                if pos == 'eng':
-                    continue
                 sub_initials, sub_finals = self._get_initials_finals(word)
                 sub_finals = self.tone_modifier.modified_tone(word, pos,
                                                               sub_finals)
