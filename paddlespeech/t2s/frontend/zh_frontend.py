@@ -144,7 +144,7 @@ class Frontend():
         return initials, finals
 
     def _get_alphabet_initials_finals(self, word: str) -> List[List[str]]:
-        word.upper()
+        word = word.upper()
         initials = []
         finals = []
         alphabet = {
